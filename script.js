@@ -4,13 +4,28 @@ const WORLD_HEIGHT = 30
 
 const worldElem = document.querySelector('[data-world')
 
-setPixelTOWorldScale()
-window.addEventListener("resize", setPixelWorldScale)
+setPixelToWorldScale()
+window.addEventListener("resize", setPixelToWorldScale)
 
-function setPixelTOWorldScale() {
+let lastTime
+function update(time) {
+  if (lasTime == null) {
+    lastTime = time
+    window.requestAnimationFrame(update)
+    return
+  }
+  const delta = time - lastTime
+
+  lastTime = time
+  window.requestAnimationFrame(update)
+}
+window.requestAnimationFrame(update)
+
+
+function setPixelToWorldScale() {
   let worldPixelScale
   if (window.innerWidth / window.innerHeight < WORLD_WIDTH / WORLD_HEIGHT) {
-    worldPixelScale = window.innerHeight / WORLD_WIDTH
+    worldPixelScale = window.width / WORLD_WIDTH
   } else {
     worldPixelScale = window.innerHeight / WORLD_HEIGHT
   }
