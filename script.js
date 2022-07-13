@@ -8,8 +8,8 @@ const worldElem = document.querySelector('[data-world')
 
 setPixelToWorldScale()
 window.addEventListener("resize", setPixelToWorldScale)
+document.addEventListener("keydown", handleStart, { once: true })
 
-setUpGround()
 
 let lastTime
 function update(time) {
@@ -20,12 +20,17 @@ function update(time) {
   }
   const delta = time - lastTime
 
-  updateGround(delta)
+  updateGround(delta, 1)
 
   lastTime = time
   window.requestAnimationFrame(update)
 }
-window.requestAnimationFrame(update)
+
+function handleStart() {
+  lastTime = null
+  setUpGround()
+  window.requestAnimationFrame(update)
+}
 
 
 function setPixelToWorldScale() {
